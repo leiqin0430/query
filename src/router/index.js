@@ -15,6 +15,7 @@ const scss = () => import('@/views/tab2/scss')
 
 const echarts = () => import('@/views/charts/echarts')
 
+const dictType = () => import('@/views/metadata/dictType')
 const dict = () => import('@/views/metadata/dict')
 const table = () => import('@/views/metadata/table')
 
@@ -30,6 +31,7 @@ export default new VueRouter({
       component: Home,
       groupName: 'metadata',
       children: [
+        {path: 'dictType', name: '代码字典类型', iconCls: 'el-icon-menu', component: dictType, meta: {groupName: 'metadata'}},
         {path: 'dict', name: '代码字典', iconCls: 'el-icon-menu', component: dict, meta: {groupName: 'metadata'}},
         {path: 'table', name: '数据表信息', iconCls: 'el-icon-menu', component: table, meta: {groupName: 'metadata'}}
       ]

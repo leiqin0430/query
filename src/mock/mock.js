@@ -4,7 +4,7 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import {loginUser} from './data/user'
-import {dicts} from './data/dict'
+import { dicts } from './data/dictType'
 
 export default {
   bootstrap () {
@@ -14,30 +14,24 @@ export default {
       let {username, password} = JSON.parse(cfg.data)
       return new Promise((resolve, reject) => {
         let user = null
-        setTimeout(() => {
-          let hasUser = loginUser.some(u => {
-            if (u.username === username && u.password === password) {
-              user = JSON.parse(JSON.stringify(u))
-              user.password = undefined
-              return true
-            }
-          })
-          if (hasUser) {
-            resolve([200, {resultCode: '000000', resultInfo: '登录成功', user}])
-          } else {
-            resolve([200, {resultCode: '999999', resultInfo: '账号或密码错误'}])
+        let hasUser = loginUser.some(u => {
+          if (u.username === username && u.password === password) {
+            user = JSON.parse(JSON.stringify(u))
+            user.password = undefined
+            return true
           }
-        }, 500)
+        })
+        if (hasUser) {
+          resolve([200, {resultCode: '000000', resultInfo: '登录成功', user}])
+        } else {
+          resolve([200, {resultCode: '999999', resultInfo: '账号或密码错误'}])
+        }
       })
     })
     // 代码字典列表
-    mock.onGet('dict/list').reply(cfg => {
+    mock.onGet('dictType/list').reply(cfg => {
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve([200, {
-            dicts: dicts
-          }])
-        }, 500)
+        resolve([200, {dicts: dicts.data}])
       })
     })
   }

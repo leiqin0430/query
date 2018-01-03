@@ -117,6 +117,11 @@
             icon: 'el-icon-menu',
             children: [
               {
+                label: '代码字典类型',
+                url: 'dictType',
+                icon: 'el-icon-menu'
+              },
+              {
                 label: '代码字典',
                 url: 'dict',
                 icon: 'el-icon-menu'
